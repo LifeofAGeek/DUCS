@@ -14,5 +14,5 @@ def ListFlattern(lst,index=0,new=[]):
             ListFlattern(lst,index,new)
         return new
 
-new=ListFlattern([3,[1,2],[1,2,3,4]])
+new=ListFlattern([3,[1,2],[1,2,3,4],[3,4,5,6,7])
 print(new)
