@@ -1,5 +1,4 @@
 def ListFlattern(lst,index=0,new=[]):
-    sum=0
     if index==len(lst):
         return 
     else:
