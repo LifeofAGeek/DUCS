@@ -1,2 +1,2 @@
 # DUCS FILES
- Semester 1 files
+ Semester 1 & 2 files
