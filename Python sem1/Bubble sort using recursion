@@ -1,0 +1,19 @@
+def bubble(lst,i,j):
+    if len(lst)==0:
+        return lst
+    if i==j:
+        return
+    else: 
+        if lst[i]>lst[i+1]:
+            lst[i],lst[i+1]=lst[i+1],lst[i]
+        bubble(lst,i+1,j)
+    
+def bubblesort(lst,i,j):
+    if i==j:
+        print(lst)
+    else:
+        bubble(lst,i,j)
+        bubblesort(lst,i,j-1)
+
+l=[9,5,8,0,15,11,-12,-111]
+bubblesort(l,0,7)
