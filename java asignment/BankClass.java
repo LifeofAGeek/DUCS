@@ -1,8 +1,26 @@
+import java.util.Random;
+
 class Account{
     String name;
     String account_num;
     String account_type;
     double balance;
+
+    public String generateNewAccountNumber(){
+        String numbers = "0123456789";
+        String newAccountNumber = "";
+    
+        Random rand = new Random();
+    
+        for (int i = 0; i < 5; i++){
+            int num = numbers.charAt(rand.nextInt(10));
+            newAccountNumber += num; 
+        }
+        
+        account_num = newAccountNumber; 
+    
+        return newAccountNumber;
+    }
 
     public void deposit(double amount){
         balance+=amount;
@@ -95,8 +113,8 @@ class BankClass{
         Sav_acct acc1= new Sav_acct();
         Curr_acct acc2=new Curr_acct();
     
-        acc1.initialize_members("Ratan Tata","1700908934537876", 100000);
-        acc2.initialize_members("Sunder Pichai","7600302034578392", 50000);
+        acc1.initialize_members("Anubhav Sethi",acc1.generateNewAccountNumber(), 100000);
+        acc2.initialize_members("Aditya Ranjan",acc2.generateNewAccountNumber(), 50000);
 
         acc1.account_info();
         acc1.deposit(1000);
