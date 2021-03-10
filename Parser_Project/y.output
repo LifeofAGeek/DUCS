@@ -1,0 +1,227 @@
+Terminals unused in grammar
+
+    KEY
+    LEFT
+    RIGHT
+
+
+Grammar
+
+    0 $accept: statement $end
+
+    1 statement: expr SEMICOLON NEWLINE
+
+    2 expr: expr LEFT_SHIFT expr
+    3     | expr RIGHT_SHIFT expr
+    4     | INCREMENT expr
+    5     | expr INCREMENT
+    6     | NUMBER
+    7     | IDEN
+    8     | '(' expr ')'
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    '(' (40) 8
+    ')' (41) 8
+    error (256)
+    KEY (258)
+    SEMICOLON (259) 1
+    IDEN (260) 7
+    NUMBER (261) 6
+    LEFT (262)
+    RIGHT (263)
+    LEFT_SHIFT (264) 2
+    RIGHT_SHIFT (265) 3
+    INCREMENT (266) 4 5
+    NEWLINE (267) 1
+
+
+Nonterminals, with rules where they appear
+
+    $accept (15)
+        on left: 0
+    statement (16)
+        on left: 1
+        on right: 0
+    expr (17)
+        on left: 2 3 4 5 6 7 8
+        on right: 1 2 3 4 5 8
+
+
+State 0
+
+    0 $accept: . statement $end
+
+    IDEN       shift, and go to state 1
+    NUMBER     shift, and go to state 2
+    INCREMENT  shift, and go to state 3
+    '('        shift, and go to state 4
+
+    statement  go to state 5
+    expr       go to state 6
+
+
+State 1
+
+    7 expr: IDEN .
+
+    $default  reduce using rule 7 (expr)
+
+
+State 2
+
+    6 expr: NUMBER .
+
+    $default  reduce using rule 6 (expr)
+
+
+State 3
+
+    4 expr: INCREMENT . expr
+
+    IDEN       shift, and go to state 1
+    NUMBER     shift, and go to state 2
+    INCREMENT  shift, and go to state 3
+    '('        shift, and go to state 4
+
+    expr  go to state 7
+
+
+State 4
+
+    8 expr: '(' . expr ')'
+
+    IDEN       shift, and go to state 1
+    NUMBER     shift, and go to state 2
+    INCREMENT  shift, and go to state 3
+    '('        shift, and go to state 4
+
+    expr  go to state 8
+
+
+State 5
+
+    0 $accept: statement . $end
+
+    $end  shift, and go to state 9
+
+
+State 6
+
+    1 statement: expr . SEMICOLON NEWLINE
+    2 expr: expr . LEFT_SHIFT expr
+    3     | expr . RIGHT_SHIFT expr
+    5     | expr . INCREMENT
+
+    SEMICOLON    shift, and go to state 10
+    LEFT_SHIFT   shift, and go to state 11
+    RIGHT_SHIFT  shift, and go to state 12
+    INCREMENT    shift, and go to state 13
+
+
+State 7
+
+    2 expr: expr . LEFT_SHIFT expr
+    3     | expr . RIGHT_SHIFT expr
+    4     | INCREMENT expr .
+    5     | expr . INCREMENT
+
+    $default  reduce using rule 4 (expr)
+
+
+State 8
+
+    2 expr: expr . LEFT_SHIFT expr
+    3     | expr . RIGHT_SHIFT expr
+    5     | expr . INCREMENT
+    8     | '(' expr . ')'
+
+    LEFT_SHIFT   shift, and go to state 11
+    RIGHT_SHIFT  shift, and go to state 12
+    INCREMENT    shift, and go to state 13
+    ')'          shift, and go to state 14
+
+
+State 9
+
+    0 $accept: statement $end .
+
+    $default  accept
+
+
+State 10
+
+    1 statement: expr SEMICOLON . NEWLINE
+
+    NEWLINE  shift, and go to state 15
+
+
+State 11
+
+    2 expr: expr LEFT_SHIFT . expr
+
+    IDEN       shift, and go to state 1
+    NUMBER     shift, and go to state 2
+    INCREMENT  shift, and go to state 3
+    '('        shift, and go to state 4
+
+    expr  go to state 16
+
+
+State 12
+
+    3 expr: expr RIGHT_SHIFT . expr
+
+    IDEN       shift, and go to state 1
+    NUMBER     shift, and go to state 2
+    INCREMENT  shift, and go to state 3
+    '('        shift, and go to state 4
+
+    expr  go to state 17
+
+
+State 13
+
+    5 expr: expr INCREMENT .
+
+    $default  reduce using rule 5 (expr)
+
+
+State 14
+
+    8 expr: '(' expr ')' .
+
+    $default  reduce using rule 8 (expr)
+
+
+State 15
+
+    1 statement: expr SEMICOLON NEWLINE .
+
+    $default  reduce using rule 1 (statement)
+
+
+State 16
+
+    2 expr: expr . LEFT_SHIFT expr
+    2     | expr LEFT_SHIFT expr .
+    3     | expr . RIGHT_SHIFT expr
+    5     | expr . INCREMENT
+
+    INCREMENT  shift, and go to state 13
+
+    $default  reduce using rule 2 (expr)
+
+
+State 17
+
+    2 expr: expr . LEFT_SHIFT expr
+    3     | expr . RIGHT_SHIFT expr
+    3     | expr RIGHT_SHIFT expr .
+    5     | expr . INCREMENT
+
+    INCREMENT  shift, and go to state 13
+
+    $default  reduce using rule 3 (expr)
